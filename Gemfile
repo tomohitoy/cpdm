@@ -50,7 +50,6 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem 'devise'
-gem 'mongoid', git: 'git://github.com/mongoid/mongoid.git'
 gem 'faye'
 gem 'private_pub'
 gem 'thin'
@@ -63,3 +62,4 @@ gem 'gon'
 gem 'roo'
 gem 'cells'
 gem 'zurb-foundation'
+gem 'ransack'

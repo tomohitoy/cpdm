@@ -1,39 +1,49 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>User:</strong>
-  <%= @pattern.user_id %>
-</p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @pattern.title %>
-</p>
-
-<p>
-  <strong>Context:</strong>
-  <%= @pattern.context %>
-</p>
-
-<p>
-  <strong>Analysis:</strong>
-  <%= @pattern.analysis_id %>
-</p>
-
-<p>
-  <strong>Consequence:</strong>
-  <%= @pattern.consequence %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= @pattern.category %>
-</p>
-
-<p>
-  <strong>Example:</strong>
-  <%= @pattern.example %>
-</p>
-
-<%= link_to 'Edit', edit_pattern_path(@pattern) %> |
-<%= link_to 'Back', patterns_path %>
+<div class="row">
+	<div class="panel">
+		<h2><%= @pattern.title %></h2>
+		<br>
+		<p>
+		<%=raw @pattern.example %>
+		</p>
+	</div>
+	<div class="panel">
+		<p>分析したデータの型を選択してください。</p>
+		<h4>
+		<% if @pattern.category == 1 %>
+			<span class="label">アンケート(評価指数・選択式)</span>
+		<% elsif @pattern.category == 2 %>
+			<span class="label">アンケート(テキスト・自由回答)</span>
+		<% elsif @pattern.category == 3 %>
+			<span class="label">ソーシャルデータ(テキストマイニング)</span>
+		<% end %>
+		</h4>
+	</div>
+	<div class="panel">
+		<nobr><h3><span class="label alert">Context</span></h3> (データ分析を行うにあたって生じた状況・前提)</nobr><br>
+		<h4><%=raw @pattern.context %></h4>
+	</div>
+	<div class="panel">
+		<nobr><h3><span class="label alert">Problem</span></h3> データ分析を行う際に分析した問題・問い</nobr><br>
+		<h4><%=raw @pattern.problem %></h4>
+	</div>
+	<div class="panel">
+		<nobr><h3><span class="label alert">Solution</span></h3> データの分析方法・解決策</nobr><br>
+		<h4>
+		<% if @pattern.analysis_id == 1 %>
+			<span class="label">テキスト分析(twitterのポジティブ・ネガティブ判定)</span>
+		<% elsif @pattern.analysis_id == 2 %>
+			<span class="label">t検定(二群の平均値の比較)</span>
+		<% elsif @pattern.analysis_id == 3 %>
+			<span class="label">χ二乗検定(二群の比率・分布の比較)</span>
+		<% end %>
+		</h4>
+		<h4><%=raw @pattern.solution %></h4>
+	</div>
+	<div class="panel">
+		<nobr><h3><span class="label alert">Consequence</span></h3> データ分析を行ったことで得られた解釈・結論</nobr><br>
+		<h4><%=raw @pattern.consequence %></h4>
+	</div>
+	<div class="panel">
+		<%= link_to '編集する', edit_pattern_path(@pattern), :class=>'button success' %> <%= link_to '戻る', patterns_path, :class=>'button secondary' %>
+	</div>
+</div>

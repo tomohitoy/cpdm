@@ -1,10 +1,12 @@
 class PatternsController < ApplicationController
   before_action :set_pattern, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /patterns
   # GET /patterns.json
   def index
-    @patterns = Pattern.all
+  	@q = Pattern.search(params[:q])
+  	@patterns = @q.result(distinct: true)
   end
 
   # GET /patterns/1
@@ -24,7 +26,7 @@ class PatternsController < ApplicationController
   # POST /patterns
   # POST /patterns.json
   def create
-    @pattern = Pattern.new(pattern_params)
+    @pattern = current_user.patterns.build(pattern_params)
 
     respond_to do |format|
       if @pattern.save
@@ -69,6 +71,6 @@ class PatternsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pattern_params
-      params.require(:pattern).permit(:user_id, :title, :context, :analysis_id, :consequence, :category, :example)
+      params.require(:pattern).permit(:user_id, :title, :context, :analysis_id, :consequence, :category, :example, :problem, :solution)
     end
 end

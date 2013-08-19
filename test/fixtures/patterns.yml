@@ -2,18 +2,18 @@
 
 one:
   user_id: 1
+  analysis_id: 1
   title: MyString
   context: MyText
-  analysis_id: 1
   consequence: MyText
   category: 1
   example: MyText
 
 two:
   user_id: 1
+  analysis_id: 1
   title: MyString
   context: MyText
-  analysis_id: 1
   consequence: MyText
   category: 1
   example: MyText

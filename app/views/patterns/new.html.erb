@@ -1,5 +1,39 @@
-<h1>New pattern</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', patterns_path %>
+<div class="row">
+	<div class="panel">
+		<h2>新規パターンの作成</h2>
+	</div>
+	<%= form_for(@pattern) do |f| %>
+	<div class="panel">
+		<div class="small-8 columns">
+		<%= f.text_field :title, :placeholder=>'パターン名' %>
+		</div>
+		<br>
+		<%= f.text_area :example, :placeholder=>'実際に活用した例' %>
+		<p>上にできるだけわかりやすくキャッチーなパターン名を書き入れ、実際に活用した例について記述してください。</p>
+	</div>
+	<div class="panel">
+		<h4>分析したデータの型を選択してください。</h4>
+		<%= f.select :category, [['アンケート(評価指数・選択式)',1],['アンケート(テキスト・自由回答)',2],['ソーシャルデータ(テキストマイニング)',1]] %>
+	</div>
+	<div class="panel">
+		<h3><span class="label success">Context</span></h3> データ分析を行うにあたって生じた状況・前提について記述してください。<br>
+		<%= f.text_area :context, :placeholder=>'Context' %>
+	</div>
+	<div class="panel">
+		<h3><span class="label success">Problem</span></h3> データ分析を行う際に分析した問題・問いについて記述してください。<br>
+		<%= f.text_area :problem, :placeholder=>'Problem' %>
+	</div>
+	<div class="panel">
+		<h3><span class="label success">Solution</span></h3> どのデータ分析を行ったのか選択し, 分析方法について記述してください。<br>
+		<%= f.select :analysis_id, [['テキスト分析(twitterのポジティブ・ネガティブ判定)',1],['t検定(二群の平均値の比較)',2],['χ二乗検定(二群の比率・分布の比較)',3]] %>
+		<%= f.text_area :solution, :placeholder=>'Solution' %>
+	</div>
+	<div class="panel">
+		<h3><span class="label success">Consequence</span></h3> データ分析を行ったことでどのような解釈ができ・結論を導けたのか、記述してください。<br>
+		<%= f.text_area :consequence, :placeholder=>'Consequence' %>
+	</div>
+	<div class="panel">
+		<%= f.submit '作成', :class=>'button' %> <%= link_to '戻る', patterns_path, :class=>'button secondary' %>
+	</div>
+		<% end %>
+</div>

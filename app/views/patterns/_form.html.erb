@@ -1,45 +1,23 @@
 <%= form_for(@pattern) do |f| %>
-  <% if @pattern.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@pattern.errors.count, "error") %> prohibited this pattern from being saved:</h2>
-
-      <ul>
-      <% @pattern.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
+    <%= f.text_field :title, :placeholder=>'パターン名' %>
   </div>
   <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.text_area :example, :placeholder=>'実際に活用された事例' %>
   </div>
   <div class="field">
-    <%= f.label :context %><br>
-    <%= f.text_area :context %>
+    <%= f.text_area :context, :placeholder=>'Context' %>
   </div>
   <div class="field">
-    <%= f.label :analysis_id %><br>
-    <%= f.number_field :analysis_id %>
+    <%= f.text_area :consequence, :placeholder=>'Consequence' %>
   </div>
   <div class="field">
-    <%= f.label :consequence %><br>
-    <%= f.text_area :consequence %>
+    <%= f.select :category, [['アンケート',1],['A/Bテスト',2],['ソーシャル分析',1]] %>
   </div>
   <div class="field">
-    <%= f.label :category %><br>
-    <%= f.number_field :category %>
+    <%= f.select :analysis_id, [['テキストマイニング',1],['t検定',2],['χ二乗検定',3]] %>
   </div>
-  <div class="field">
-    <%= f.label :example %><br>
-    <%= f.text_area :example %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="actions panel">
+    <%= f.submit :class=>'button' %>
   </div>
 <% end %>
