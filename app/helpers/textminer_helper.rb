@@ -1,0 +1,2 @@
+module TextminerHelper
+end

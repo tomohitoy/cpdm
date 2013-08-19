@@ -1,4 +1,13 @@
 Cpdm::Application.routes.draw do
+  resources :analyses
+
+  resources :patterns
+
+  get "analyzer/index"
+  get "textminer/index"
+  root :to => 'welcome#index'
+  devise_for :users
+  get 'home', :to => "home#index", :as => :user_root
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

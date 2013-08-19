@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @pattern.user_id %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @pattern.title %>
+</p>
+
+<p>
+  <strong>Context:</strong>
+  <%= @pattern.context %>
+</p>
+
+<p>
+  <strong>Analysis:</strong>
+  <%= @pattern.analysis_id %>
+</p>
+
+<p>
+  <strong>Consequence:</strong>
+  <%= @pattern.consequence %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @pattern.category %>
+</p>
+
+<p>
+  <strong>Example:</strong>
+  <%= @pattern.example %>
+</p>
+
+<%= link_to 'Edit', edit_pattern_path(@pattern) %> |
+<%= link_to 'Back', patterns_path %>

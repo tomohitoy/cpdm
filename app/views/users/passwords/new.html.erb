@@ -1,0 +1,22 @@
+<div class="row">
+<div class="large-8 columns">
+	<div class="panel">
+		<h2>パスワード再発行</h2>
+		<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+		<%= devise_error_messages! %>
+		<%= f.email_field :email, :placeholder=>'メールアドレス', :autofocus => true %>
+		<div><%= f.submit "パスワードを再発行する", :class=>'button' %></div>
+		<% end %>
+	</div>
+</div>
+<div class="large-4 columns">
+	<div class="panel">
+		<p>アカウントをお持ちの方は<br/>
+		<%= link_to "トップページへ", root_path %>
+		</p>
+		<p>アカウントをお持ちでない方は<br/>
+		<%= link_to "新規登録", [ :new, :user_registration ] %>
+		</p>
+	</div>
+</div>
+</div>

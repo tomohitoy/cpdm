@@ -1,0 +1,21 @@
+<nav class="top-bar">
+	<% if current_user %>
+  <ul class="title-area">
+    <li class="name">
+      <h1><%= link_to "みんなのデータ分析", root_path %></a></h1>
+    </li>
+  </ul>
+  <section class="top-bar-section">
+    <ul class="right">
+      <li class="divider"></li>
+      <li><%= link_to "ホーム", user_root_path %></li>
+      <li class="divider"></li>
+      <li><%= link_to "テキスト分析", textminer_index_path %></li>
+      <li class="divider"></li>
+      <li><%= link_to "統計解析", analyzer_index_path %></li>
+      <li class="divider"></li>
+      <li><%= link_to "ログアウト", [ :destroy, :user_session ],:method => :delete , :class => 'signOut' if current_user %></li>
+    </ul>
+  </section>
+  <% end %>
+</nav>

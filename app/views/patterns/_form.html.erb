@@ -1,0 +1,45 @@
+<%= form_for(@pattern) do |f| %>
+  <% if @pattern.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pattern.errors.count, "error") %> prohibited this pattern from being saved:</h2>
+
+      <ul>
+      <% @pattern.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :context %><br>
+    <%= f.text_area :context %>
+  </div>
+  <div class="field">
+    <%= f.label :analysis_id %><br>
+    <%= f.number_field :analysis_id %>
+  </div>
+  <div class="field">
+    <%= f.label :consequence %><br>
+    <%= f.text_area :consequence %>
+  </div>
+  <div class="field">
+    <%= f.label :category %><br>
+    <%= f.number_field :category %>
+  </div>
+  <div class="field">
+    <%= f.label :example %><br>
+    <%= f.text_area :example %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
