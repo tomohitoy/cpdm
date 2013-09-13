@@ -29,3 +29,25 @@
 		</ul>
 	</div>
 </div>
+
+
+<div class="well sidebar-nav">
+  <p class="nav-header">SNS連携</p>
+
+  <ul class="nav nav-tabs nav-stacked">
+    <% Devise.omniauth_providers.each do |provider| %>
+
+      <% if current_user.connected?(provider) %>
+        <li>
+          <%= link_to image_tag("authbuttons/#{provider.to_s}_32.png") + " 認証する",
+            user_omniauth_authorize_path(provider) %>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to image_tag("authbuttons/#{provider.to_s}_32.png") + "  解除する",
+            disconnect_omniauth_provider_path(provider), :method => :delete %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

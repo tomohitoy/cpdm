@@ -226,6 +226,23 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
+  config.omniauth :twitter, ENV['xLq3UCn9rW6ZW7dTfBdnw'], ENV['XeTnRZm2F7H3HiE9r3sBnYdOABUAggwxhZEb0q8CM']
+
+  DeviseController.class_eval do
+    before_action :resource_params #, only: [:show, :edit, :update, :destroy]
+
+  def resource_params
+    unless params[resource_name].blank?
+      params.require(resource_name).permit(
+	    # ココ追加
+        :twitter_id, :twitter_token, :twitter_secret,
+        :facebook_id, :facebook_token, :facebook_secret,
+
+　　　　・・・
+      )
+    end
+  end
+  end
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
