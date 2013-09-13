@@ -181,7 +181,6 @@
 	</div>
     <%= javascript_tag do %>
     	function setJsondata() {
-		$(function () {
 			var query = $('#query').val();
 			var token = $('#token').val();
 			var secret = $('#secret').val();
@@ -196,8 +195,7 @@
             	renderChart(jsondata, pn);
 			});
 			//$.ajaxSetup({async: true});
-		});
-	};
+		}
 	<% end %>
 	
 	</div>
