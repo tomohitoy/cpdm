@@ -1,0 +1,28 @@
+.equal {
+	fill: green;
+	background-color: lightgreen;
+	font-size: small;
+}
+.nega {
+	fill: red;
+	background-color: red;
+	font-size: small;
+}
+.posi {
+	fill: blue;
+	background-color: lightblue;
+	font-size: small;
+}
+li {
+	font-size: small;
+}
+#loading {
+	display: none;
+}
+#chart {
+	width: 650px;
+	float: left;
+}
+.user-img {
+	float: left;
+}

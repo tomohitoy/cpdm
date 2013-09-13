@@ -6,12 +6,12 @@
     </li>
   </ul>
   <section class="top-bar-section">
+	<% if current_user %>
     <ul class="right">
       <li class="divider"></li>
-      <li><%= link_to "パターンから探す", patterns_path %></li>
-      <li class="divider"></li>
-      <li><%= link_to "ログアウト", [ :destroy, :user_session ],:method => :delete , :class => 'signOut' if current_user %></li>
+      <li><%= link_to "ログアウト", destroy_user_session_path, :method => :delete %></li>
     </ul>
+    <% end %>
   </section>
   <% end %>
 </nav>

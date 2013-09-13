@@ -1,11 +1,14 @@
 Cpdm::Application.routes.draw do
-  resources :patterns
+  get "start/index"
+  #resources :patterns
 
-  get "analyzer/index"
-  get "textminer/index"
-  root :to => 'welcome#index'
-  devise_for :users
-  get 'patterns', :to => 'patterns#index', :as => :user_root
+  #get "analyzer/index"
+  get "textminer/index", :as => :user_root
+  root :to => 'start#index'
+  #root :to => 'welcome#index'
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  #get 'patterns', :to => 'patterns#index', :as => :user_root
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

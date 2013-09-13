@@ -14,6 +14,7 @@ Devise.setup do |config|
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
   # available as additional gems.
   require 'devise/orm/active_record'
+  config.omniauth :twitter, "xLq3UCn9rW6ZW7dTfBdnw", "XeTnRZm2F7H3HiE9r3sBnYdOABUAggwxhZEb0q8CM"
 
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is
@@ -117,7 +118,7 @@ Devise.setup do |config|
   config.reconfirmable = true
 
   # Defines which key will be used when confirming an account
-  # config.confirmation_keys = [ :email ]
+  config.confirmation_keys = [ :name ]
 
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
