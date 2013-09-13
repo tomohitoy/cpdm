@@ -145,12 +145,10 @@
 	}
 	
 	// 細々した機能たち
-	$(function() {
 		$("#query").keydown(function(evnt) {
 			if(evnt.keyCode === 13) {
 				setJsondata();
 			}
-		});	
 		$("select").change(function() {
 			var pn = $('#pn').val();
 			$("#chart").empty();
