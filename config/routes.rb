@@ -1,14 +1,10 @@
 Cpdm::Application.routes.draw do
   resources :patterns
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" } do
-    delete '/users/disconnect/:provider',
-      :to => 'users#disconnect_omniauth_provider',
-      :as => 'disconnect_omniauth_provider'
-  end
-  resources :users
+
   get "analyzer/index"
   get "textminer/index"
   root :to => 'welcome#index'
+  devise_for :users
   get 'patterns', :to => 'patterns#index', :as => :user_root
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
