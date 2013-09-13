@@ -174,7 +174,7 @@
 			</select>
 			<input type="button" class="button" value="ついーとまいにんぐ！" onclick="setJsondata();" />
 		</p>
-		<div id="loading"><%= image_tag 'tuningIndicator.gif', :width=>'64px', :height=>'64px', :alt=>'Loading...'%></div>
+		<div id="loading"><%= image_tag 'turningIndicator.gif', :width=>'64px', :height=>'64px', :alt=>'Loading...'%></div>
 		
 		<div id="chart"></div>
 		<div id="key"><ul id="output"></ul></div>
@@ -190,7 +190,7 @@
 			$("#output").empty();
 			$("#loading").show();
 			//$.ajaxSetup({async: false}); 
-			$.getJSON("http://133.242.171.135/evaluate_tweets.py?q="+query+"&token="+<%=current_user.access_token%>+"&secret="+<%=current_user.access_token_secret%>, function(data){
+			$.getJSON("http://133.242.171.135/evaluate_tweets.py?q="+query+"&token=<%=current_user.access_token%>&secret=<%=current_user.access_token_secret%>", function(data){
     			jsondata = data;
             	$("#loading").fadeOut();
             	renderChart(jsondata, pn);
