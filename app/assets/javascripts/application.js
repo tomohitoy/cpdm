@@ -10,8 +10,8 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require d3
+//= require jquery-1.10.2.js
+//= require d3.js
 //= require jquery_ujs
 //= require foundation
 //= require_tree .
