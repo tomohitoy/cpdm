@@ -239,21 +239,15 @@
 			// ロード中のくるくるを表示する
 			$("#loading").show(); 
 			// JSONを手に入れる
-			$.getJSON("http://133.242.171.135/evaluate_tweets.py?q="+query+"&token=<%=current_user.access_token%>&secret=<%=current_user.access_token_secret%>", function(data){
-    			// あれ？グローバル変数でjsondata宣言してたはずだけどどこいった？？
-    			jsondata = data;
-    			// ロード中のくるくるを消す
-            	$("#loading").fadeOut();
-            	// jsondataとポジネガを引数にD3で描画
-            	renderChart(jsondata, pn);
-            	// JSONからツイート何件、日時、とかを表示する部分
-	           	$("#basic_info").append(
-            		jsondata.basic_info.tweets_num + 
-            		"件のツイートから評価語を含む" + 
-            		jsondata.basic_info.evaluate_num + 
-            		"件のツイートを分析<br />（取得期間 " + 
-            		jsondata.basic_info.oldest_date + 
-            		" から " + jsondata.basic_info.latest_date + "）");
+			$.getJSON({
+				type: "GET",
+				url: 'http://133.242.171.135',
+				{q: query, token: <%=current_user.access_token%>, secret: <%= current_user.access_token_secret%>},
+				function(data){
+    				var jsondata = data;
+            		$("#loading").fadeOut();            	
+	           		$("#basic_info").append("<p>"+jsondata+"</p>");
+	           	}
 			});
 		}
 	<% end %>
