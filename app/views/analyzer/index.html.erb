@@ -218,31 +218,29 @@
     	function setJsondata() {
     		// フォームから値を取得
 			var query = $('#query').val();
-			var token = $('#token').val();
-			var secret = $('#secret').val();
 			var pn = $('#pn').val();
 			// 二回目以降で前回の結果が残らないように空にする
 			$("#chart").empty();
 			$("#output").empty();
 			$("#basic_info").empty();
 			// ロード中のくるくるを表示する
-			$("#loading").show(); 
-		$.getJSON("http://133.242.171.135/evaluate_tweets.py?q="+query+"&token=<%=current_user.access_token%>&secret=<%=current_user.access_token_secret%>", function(data){
-    			// あれ？グローバル変数でjsondata宣言してたはずだけどどこいった？？
-    			var jsondata = data;
-    			// ロード中のくるくるを消す
+			$("#loading").show();
+		$.ajax({
+			url: "http://133.242.171.135/evaluate_tweets.py",
+			type: 'GET',
+			data:{
+				q:query
+				token:"<%=current_user.access_token%>"
+				secret:"<%=current_user.access_token_secret%>"
+			},
+			dataType: "json",
+			success: function(data){
             	$("#loading").fadeOut();
-            	// jsondataとポジネガを引数にD3で描画
-            	renderChart(jsondata, pn);
-            	// JSONからツイート何件、日時、とかを表示する部分
-	           	$("#basic_info").append(
-            		jsondata.basic_info.tweets_num + 
-            		"件のツイートから評価語を含む" + 
-            		jsondata.basic_info.evaluate_num + 
-            		"件のツイートを分析<br />（取得期間 " + 
-            		jsondata.basic_info.oldest_date + 
-            		" から " + jsondata.basic_info.latest_date + "）");
-			
+            	$("#basic_info").append('<span>'+data'</span>');
+			},
+			error: function (responseObject) {
+    			alert(responseObject.responseText);
+    		}
 		});
 		}
 	<% end %>
