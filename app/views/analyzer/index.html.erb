@@ -5,7 +5,6 @@
      <title>Bar Chart</title>
      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <script type="text/javascript" src="http://d3js.org/d3.v2.min.js"> </script>
-	<script type="text/javascript" src="jquery-1.10.2.js"> </script>
    <script type="text/javascript">
     // 棒グラフを表示する
 	function renderChart(json, pn) {
@@ -221,7 +220,7 @@
 			<input type="button" class="button" value="ついーとまいにんぐ！" onclick="setJsondata();" />
 		</p>
 		<p id="basic_info"></p>
-		<div id="loading"><img src="./turningIndicator.gif" width="64px" height="64px" alt="Loading..." /></div>
+		<div id="loading"><%= image_tagi "turningIndicator.gif", :width=>"64px", :height=>"64px", :alt=>"Loading..." %></div>
 		
 		<div id="chart"></div>
 		<div id="key"><ul id="output"></ul></div>
