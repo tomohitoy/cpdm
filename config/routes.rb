@@ -4,7 +4,6 @@ Cpdm::Application.routes.draw do
 
   get "analyzer/index"
   get "textminer/index", :as => :user_root
-  get "textminer/mining"
   root :to => 'start#index'
   #root :to => 'welcome#index'
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
