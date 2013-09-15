@@ -241,7 +241,7 @@
 			// JSONを手に入れる
 			$.getJSON({
 				type: "GET",
-				url: 'http://133.242.171.135',
+				url: 'http://133.242.171.135/evaluate_tweets.py',
 				{q: query, token: <%=current_user.access_token%>, secret: <%= current_user.access_token_secret%>},
 				function(data){
     				var jsondata = data;
