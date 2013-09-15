@@ -13,8 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require d3.js
-//= require foundation
 //= require mining.js
 //= require_tree .
 
-$(function(){ $(document).foundation(); });
