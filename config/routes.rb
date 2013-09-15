@@ -2,7 +2,7 @@ Cpdm::Application.routes.draw do
   get "start/index"
   #resources :patterns
 
-  #get "analyzer/index"
+  get "analyzer/index"
   get "textminer/index", :as => :user_root
   root :to => 'start#index'
   #root :to => 'welcome#index'
