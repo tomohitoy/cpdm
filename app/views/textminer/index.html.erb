@@ -16,8 +16,7 @@
 		<div id="key"><ul id="output"></ul></div>
 	</div>
     <%= javascript_tag do %>
-    	$(function() {
-
+    	$(function(){
 			// Enterが押下されたらsetJsondata()を実行する
 			$("#query").keydown(function(evnt) {
 				if(evnt.keyCode === 13) {
