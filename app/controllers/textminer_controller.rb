@@ -3,7 +3,7 @@ class TextminerController < ApplicationController
   def index
   end
   def mining
-    RubyPython.start
+    RubyPython.start(:python_exe => "python2.7.5")
     cPickle = RubyPython.import("cPickle")
     sys = RubyPython.import 'sys'
     sys.path.append("#{Rails.root}/lib")
