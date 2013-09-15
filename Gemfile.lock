@@ -29,7 +29,6 @@ GEM
     arel (4.0.0)
     atomic (1.1.13)
     bcrypt-ruby (3.1.1)
-    blankslate (3.1.2)
     builder (3.1.4)
     capistrano (2.15.5)
       highline
@@ -83,7 +82,6 @@ GEM
     faye-websocket (0.6.3)
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.2.0)
-    ffi (1.9.0)
     gon (4.1.1)
       actionpack (>= 2.3.0)
       json
@@ -170,9 +168,6 @@ GEM
       rubyzip
       spreadsheet (> 0.6.4)
     ruby-ole (1.2.11.7)
-    rubypython (0.6.3)
-      blankslate (>= 2.1.2.3)
-      ffi (>= 1.0.7)
     rubyzip (0.9.9)
     sass (3.2.10)
     sass-rails (4.0.0)
@@ -251,7 +246,6 @@ DEPENDENCIES
   ransack
   remotipart (~> 1.0)
   roo
-  rubypython
   sass-rails (~> 4.0.0)
   sdoc
   therubyracer
