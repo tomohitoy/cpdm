@@ -1,167 +1,5 @@
 <div class="row">
 	<div class="large-9 columns">
-    <%= javascript_tag do %>
-    // 棒グラフを表示する
-	function renderChart(json, pn) {
-		var data = d3.values(json.count);
-		//var data = d3.csv.parse(d3.select('#csv').text());
-		//console.log(data);
-		var valueLabelWidth = 40; // space reserved for value labels (right)
-		var barHeight = 20; // height of one bar
-		var barLabelWidth = 150; // space reserved for bar labels
-		var barLabelPadding = 5; // padding between bar and bar labels (left)
-		var gridLabelHeight = 18; // space reserved for gridline labels
-		var gridChartOffset = 3; // space between start of grid and first bar
-		var maxBarWidth = 420; // width of the bar with the max value
- 
-		// accessor functions 
-		var barLabel = function(d) { return d['name']; };
-		var barValue = function(d) { return d[pn]; };
-
-		// sorting
-		var sortedData = data.sort(function(a, b) {
-		 return d3.descending(barValue(a), barValue(b));
-		}); 
-		//console.log(sortedData);
-		// scales
-		var yScale = d3.scale.ordinal().domain(d3.range(0, sortedData.length)).rangeBands([0, sortedData.length * barHeight]);
-		var y = function(d, i) { return yScale(i); };
-		var yText = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
-		var x = d3.scale.linear().domain([0, d3.max(sortedData, barValue)]).range([0, maxBarWidth]);
-		// svg container element
-		var chart = d3.select('#chart').append("svg")
-		  .attr('width', maxBarWidth + barLabelWidth + valueLabelWidth)
-		  .attr('height', gridLabelHeight + gridChartOffset + sortedData.length * barHeight);
-		// grid line labels
-		var gridContainer = chart.append('g')
-		  .attr('transform', 'translate(' + barLabelWidth + ',' + gridLabelHeight + ')'); 
-		gridContainer.selectAll("text").data(x.ticks(10)).enter().append("text")
-		  .filter(function(d) { return d[pn] > 1 })  
-		  .attr("x", x)
-		  .attr("dy", -3)
-		  .attr("text-anchor", "middle")
-		  .text(String);
-		// vertical grid lines
-		gridContainer.selectAll("line").data(x.ticks(10)).enter().append("line")
-		  .filter(function(d) { return d[pn] > 1 })
-		  .attr("x1", x)
-		  .attr("x2", x)
-		  .attr("y1", 0)
-		  .attr("y2", yScale.rangeExtent()[1] + gridChartOffset)
-		  .style("stroke", "#ccc");
-		// bar labels
-		var labelsContainer = chart.append('g')
-		  .attr('transform', 'translate(' + (barLabelWidth - barLabelPadding) + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
-		labelsContainer.selectAll('text').data(sortedData).enter().append('text')
-		  .attr('y', yText)
-		  .attr('stroke', 'none')
-		  .attr('fill', 'black')
-		  .attr("dy", ".35em") // vertical-align: middle
-		  .attr('text-anchor', 'end')
-		  .text(barLabel);
-		// bars
-		var barsContainer = chart.append('g')
-		  .attr('transform', 'translate(' + barLabelWidth + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
-		if (pn === 'nega') {
-			barsContainer.selectAll("rect").data(sortedData).enter().append("rect")
-		  	  .attr('y', y)
-		  	  .attr('height', yScale.rangeBand())
-		  	  .attr('width', function(d) { return x(barValue(d)); })
-		      .attr('stroke', 'white')
-		      .attr('fill', 'firebrick');
-		} else {
-			barsContainer.selectAll("rect").data(sortedData).enter().append("rect")
-		  	  .attr('y', y)
-		  	  .attr('height', yScale.rangeBand())
-		  	  .attr('width', function(d) { return x(barValue(d)); })
-		      .attr('stroke', 'white')
-		      .attr('fill', 'royalblue');		
-		};
-		// bar value labels
-		barsContainer.selectAll("text").data(sortedData).enter().append("text")
-		  .attr("x", function(d) { return x(barValue(d)); })
-		  .attr("y", yText)
-		  .attr("dx", 3) // padding-left
-		  .attr("dy", ".35em") // vertical-align: middle
-		  .attr("text-anchor", "start") // text-align: right
-		  .attr("fill", "black")
-		  .attr("stroke", "none")
-		  .style("class", "bar-value")
-		  .text(function(d) { return d3.round(barValue(d), 2); });
-		// start line
-		barsContainer.append("line")
-		  .attr("y1", -gridChartOffset)
-		  .attr("y2", yScale.rangeExtent()[1] + gridChartOffset)
-		  .style("stroke", "#000");
-
-		if (pn === 'nega') {
-			d3.selectAll('rect')
-				.on('mouseover', function(d){
-					d3.select(this)
-						.transition()
-						.attr("fill", "deeppink")				
-				});
-		
-			d3.selectAll('rect')
-				.on('mouseout', function(d){
-					d3.select(this)
-						.transition()
-						.attr('fill', 'firebrick');
-				});
-		} else {
-			d3.selectAll('rect')
-				.on('mouseover', function(d){
-					d3.select(this)
-						.transition()
-						.attr("fill", "skyblue")				
-				});
-		
-			d3.selectAll('rect')
-				.on('mouseout', function(d){
-					d3.select(this)
-						.transition()
-						.attr('fill', 'royalblue');
-				});
-		
-		}			
-		d3.selectAll('rect')
-        	.on('click', showText);
-        
-        d3.selectAll(".bar-value")
-        	.on('click', showText);
-
-	}
-	
-	//onclickでツイートを表示する
-	function showText(d) {
-		$(document).ready(function () {
-				$("#output").empty();
-				for (var i in jsondata.noun) {
-					if (jsondata.noun[i].attr === d.name) {
-						$("#output").append("<li><span class='" + jsondata.noun[i].pn +"'>【" + jsondata.noun[i].evaluate_word + "】</span><br />" + jsondata.noun[i].text + "</li>");
-					}
-				}
-		})
-	}
-	
-	// 細々した機能たち
-		$("#query").keydown(function(evnt) {
-			if(evnt.keyCode === 13) {
-				setJsondata();
-			}
-		$("select").change(function() {
-			var pn = $('#pn').val();
-			$("#chart").empty();
-			$("#output").empty();
-			renderChart(jsondata, pn);
-		});
-		//$('#key').exFlexFixed({
-			//container : 'body'
-		//});
-	})
-
-    <% end %>
-
 	<div id="container">
 		<h1>ネガティブ評価は改善のきっかけ！(仮) ver0.1beta</h1>
 		<p>
@@ -178,21 +16,54 @@
 		<div id="key"><ul id="output"></ul></div>
 	</div>
     <%= javascript_tag do %>
+    	$(function() {
+
+			// Enterが押下されたらsetJsondata()を実行する
+			$("#query").keydown(function(evnt) {
+				if(evnt.keyCode === 13) {
+					setJsondata();
+				}
+			});	
+		
+			// プルダウンメニューが変更されたらrenderChart()を実行する
+			$("select").change(function() {
+				var pn = $('#pn').val();
+				$("#chart").empty();
+				$("#output").empty();
+				renderChart(jsondata, pn);
+			});
+		});
+    	
+    	
     	function setJsondata() {
+    		// フォームから値を取得
 			var query = $('#query').val();
 			var token = $('#token').val();
 			var secret = $('#secret').val();
 			var pn = $('#pn').val();
+			// 二回目以降で前回の結果が残らないように空にする
 			$("#chart").empty();
 			$("#output").empty();
-			$("#loading").show();
-			//$.ajaxSetup({async: false}); 
+			$("#basic_info").empty();
+			// ロード中のくるくるを表示する
+			$("#loading").show(); 
+			// JSONを手に入れる
 			$.getJSON("http://133.242.171.135/evaluate_tweets.py?q="+query+"&token=<%=current_user.access_token%>&secret=<%=current_user.access_token_secret%>", function(data){
-    			jsondata = data;
+    			// あれ？グローバル変数でjsondata宣言してたはずだけどどこいった？？
+    			var jsondata = data;
+    			// ロード中のくるくるを消す
             	$("#loading").fadeOut();
+            	// jsondataとポジネガを引数にD3で描画
             	renderChart(jsondata, pn);
+            	// JSONからツイート何件、日時、とかを表示する部分
+	           	$("#basic_info").append(
+            		jsondata.basic_info.tweets_num + 
+            		"件のツイートから評価語を含む" + 
+            		jsondata.basic_info.evaluate_num + 
+            		"件のツイートを分析<br />（取得期間 " + 
+            		jsondata.basic_info.oldest_date + 
+            		" から " + jsondata.basic_info.latest_date + "）");
 			});
-			//$.ajaxSetup({async: true});
 		}
 	<% end %>
 	

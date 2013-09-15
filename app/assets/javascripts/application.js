@@ -14,6 +14,7 @@
 //= require d3.js
 //= require jquery_ujs
 //= require foundation
+//= require mining.js
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
