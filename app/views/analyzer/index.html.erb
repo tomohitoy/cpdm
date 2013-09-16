@@ -229,18 +229,24 @@
 			url: "http://133.242.171.135/evaluate_tweets.py",
 			type: 'GET',
 			data:{
-				q:query
-				token:"<%=current_user.access_token%>"
+				q:query,
+				token:"<%=current_user.access_token%>",
 				secret:"<%=current_user.access_token_secret%>"
 			},
-			dataType: "json",
-			success: function(data){
+			dataType: "jsonp",
+			complete: function(json){
+				var jsondata = json;
             	$("#loading").fadeOut();
-            	$("#basic_info").append('<span>'+data'</span>');
-			},
-			error: function (responseObject) {
-    			alert(responseObject.responseText);
-    		}
+            	renderChart(jsondata, pn);
+	           	$("#basic_info").append(
+            		jsondata.basic_info.tweets_num + 
+            		"件のツイートから評価語を含む" + 
+            		jsondata.basic_info.evaluate_num + 
+            		"件のツイートを分析<br />（取得期間 " + 
+            		jsondata.basic_info.oldest_date + 
+            		" から " + jsondata.basic_info.latest_date + "）");
+            	
+			}
 		});
 		}
 	<% end %>
