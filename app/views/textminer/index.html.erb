@@ -17,6 +17,7 @@
 		<div id="key"><ul id="output"></ul></div>
 	</div>
     <%= javascript_tag do %>
+    	var jsondata;
     	$(function(){
 			// Enterが押下されたらsetJsondata()を実行する
 			$("#query").keydown(function(evnt) {
@@ -34,7 +35,6 @@
 			});
 		});
     	
-
     	function setJsondata() {
     		// フォームから値を取得
 			var query = $('#query').val();
@@ -55,7 +55,7 @@
 			},
 			dataType: "jsonp",
 			success: function(data){
-				var jsondata = data;
+				jsondata = data;
     			// ロード中のくるくるを消す
             	$("#loading").fadeOut();
             	// jsondataとポジネガを引数にD3で描画
