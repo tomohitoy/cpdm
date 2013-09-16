@@ -234,10 +234,13 @@
 				secret:"<%=current_user.access_token_secret%>"
 			},
 			dataType: "jsonp",
-			complete: function(json){
-				var jsondata = json;
+			success: function(data){
+				var jsondata = data;
+    			// ロード中のくるくるを消す
             	$("#loading").fadeOut();
+            	// jsondataとポジネガを引数にD3で描画
             	renderChart(jsondata, pn);
+            	// JSONからツイート何件、日時、とかを表示する部分
 	           	$("#basic_info").append(
             		jsondata.basic_info.tweets_num + 
             		"件のツイートから評価語を含む" + 
@@ -245,7 +248,6 @@
             		"件のツイートを分析<br />（取得期間 " + 
             		jsondata.basic_info.oldest_date + 
             		" から " + jsondata.basic_info.latest_date + "）");
-            	
 			}
 		});
 		}
