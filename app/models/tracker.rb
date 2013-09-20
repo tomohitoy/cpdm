@@ -6,7 +6,7 @@ class Tracker < ActiveRecord::Base
   require 'net/http'
   require 'uri'
 
-  def tracking
+  def self.tracking
     @trackers = Tracker.includes(:user).all
     if @trackers.present?
       @trackers.each do |tracker|
