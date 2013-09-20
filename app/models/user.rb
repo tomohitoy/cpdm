@@ -4,6 +4,6 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable #, :validatable
-  has_many :patterns
-  has_many :trackers
+  has_many :patterns, :dependent => :destroy
+  has_many :trackers, :dependent => :destroy
 end

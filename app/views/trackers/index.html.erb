@@ -1,11 +1,12 @@
-<h1>Listing trackers</h1>
+<div class="row">
+	<div class="large-12 columns">
+	<div id="container">
+<h3>追跡ワード</h3>
 
 <table>
   <thead>
     <tr>
-      <th>User</th>
-      <th>Queue</th>
-      <th></th>
+      <th>あなたが追跡しているワード</th>
       <th></th>
       <th></th>
     </tr>
@@ -14,11 +15,9 @@
   <tbody>
     <% @trackers.each do |tracker| %>
       <tr>
-        <td><%= tracker.user_id %></td>
         <td><%= tracker.queue %></td>
-        <td><%= link_to 'Show', tracker %></td>
-        <td><%= link_to 'Edit', edit_tracker_path(tracker) %></td>
-        <td><%= link_to 'Destroy', tracker, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '編集', edit_tracker_path(tracker) %></td>
+        <td><%= link_to '削除', tracker, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +25,8 @@
 
 <br>
 
-<%= link_to 'New Tracker', new_tracker_path %>
+<%= link_to '新しい追跡ワードを登録する', new_tracker_path %>
+
+</div>
+</div>
+</div>

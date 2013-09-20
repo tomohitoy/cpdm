@@ -4,7 +4,7 @@ class TrackersController < ApplicationController
   # GET /trackers
   # GET /trackers.json
   def index
-    @trackers = Tracker.all
+    @trackers = current_user.trackers
   end
 
   # GET /trackers/1
@@ -24,11 +24,11 @@ class TrackersController < ApplicationController
   # POST /trackers
   # POST /trackers.json
   def create
-    @tracker = Tracker.new(tracker_params)
+    @tracker = current_user.trackers.build(tracker_params)
 
     respond_to do |format|
       if @tracker.save
-        format.html { redirect_to @tracker, notice: 'Tracker was successfully created.' }
+        format.html { redirect_to trackers_path, notice: 'Tracker was successfully created.' }
         format.json { render action: 'show', status: :created, location: @tracker }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class TrackersController < ApplicationController
   def update
     respond_to do |format|
       if @tracker.update(tracker_params)
-        format.html { redirect_to @tracker, notice: 'Tracker was successfully updated.' }
+        format.html { redirect_to trackers_path, notice: 'Tracker was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

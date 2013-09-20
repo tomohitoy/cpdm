@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130913131126) do
+ActiveRecord::Schema.define(version: 20130920002812) do
 
   create_table "patterns", force: true do |t|
     t.integer  "user_id"
@@ -23,6 +23,13 @@ ActiveRecord::Schema.define(version: 20130913131126) do
     t.text     "example"
     t.text     "problem"
     t.text     "solution"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "trackers", force: true do |t|
+    t.integer  "user_id"
+    t.string   "queue"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
