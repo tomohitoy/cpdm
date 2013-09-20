@@ -10,13 +10,13 @@ class Tracker < ActiveRecord::Base
     @trackers = Tracker.includes(:user).all
     if @trackers.present?
       @trackers.each do |tracker|
-        request = http_request("get","http://133.242.171.135/evaluate_tweets_mongo.py",{:q=>tracker.queue, :token=>tracker.user.access_token, :secret=>tracker.user.access_token_secret})
+        request = self.http_request("get","http://133.242.171.135/evaluate_tweets_mongo.py",{:q=>tracker.queue, :token=>tracker.user.access_token, :secret=>tracker.user.access_token_secret})
       end
     end
     return
   end
   
-  def http_request(method, uri, query_hash = {})
+  def self.http_request(method, uri, query_hash = {})
     uri = URI.parse(uri) if uri.is_a? String
     method = method.to_s.strip.downcase
     query_string = (query_hash||{}).map{|k,v|
