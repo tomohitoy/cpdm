@@ -19,6 +19,9 @@
 
 # Learn more: http://github.com/javan/whenever
 
+set :output, 'log/cron_log.log'
+job_type :runner, "cd :path && bin/rails runner -e :environment ':task' :output"
+
 every 1.hours do
   runner "Tracker.tracking"
 end
