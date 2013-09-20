@@ -65,4 +65,4 @@ gem 'zurb-foundation'
 gem 'ransack'
 gem 'omniauth'
 gem 'omniauth-twitter'
-gem 'whenever'
+gem 'whenever', :require => false
