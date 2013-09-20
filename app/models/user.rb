@@ -5,4 +5,5 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable #, :validatable
   has_many :patterns
+  has_many :trackers
 end

@@ -1,4 +1,6 @@
 Cpdm::Application.routes.draw do
+  resources :trackers
+
   get "start/index"
   #resources :patterns
 
